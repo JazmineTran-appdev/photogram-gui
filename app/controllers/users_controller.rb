@@ -5,4 +5,19 @@ class UsersController < ApplicationController
 
     render({ :template => "user_templates/index.html.erb"})
   end
+
+  def show
+    # Params = {"path_username"=>"anisa"}
+    url_username = params.fetch("path_username")
+    matching_usernames = User.where({ :username => url_username })
+    @the_user = matching_usernames.first
+    
+    # If you want to write your code defensively!
+    # if the_user == nil
+      # redirect_to("/404")
+    # else
+      render({ :template => "user_templates/show.html.erb"})
+    # end
+
+  end
 end
