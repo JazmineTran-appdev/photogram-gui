@@ -46,4 +46,26 @@ class PhotosController < ApplicationController
     # render({ :template => "photo_templates/create.html.erb" })
     redirect_to("/photos/#{a_new_photo.id}")
   end
+
+  def update
+    # params = {"query_image"=>"image goes here", "query_caption"=>"caption", "modify_id"=>"id"}
+
+    the_id = params.fetch("modify_id")
+    
+    matching_photos = Photo.where({ :id => the_id })
+    
+    the_photo = matching_photos.first
+
+    input_image = params.fetch("query_image")
+    input_caption = params.fetch("query_caption")
+
+    the_photo.image = input_image
+    the_photo.caption= input_caption
+
+    the_photo.save
+    
+    #render({ :template => "photo_templates/update.html.erb" })
+
+    redirect_to("/photos/#{the_photo.id}")
+  end
 end
