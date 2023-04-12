@@ -20,6 +20,17 @@ class UsersController < ApplicationController
     # end
   end
 
+  def create
+    # params = {"query_name"=>"Jazmine"}
+    input_user = params.fetch("query_name")
+
+    new_user = User.new
+    new_user.username = input_user
+    new_user.save
+
+    redirect_to("/users/#{new_user.username}")
+  end
+
   def update
     # Params = {"update_un"=>"august", "path_username"=>"augustine"}
     the_username = params.fetch("modify_name")
