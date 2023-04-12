@@ -18,6 +18,19 @@ class UsersController < ApplicationController
     # else
       render({ :template => "user_templates/show.html.erb"})
     # end
+  end
 
+  def update
+    # Params = {"update_un"=>"august", "path_username"=>"augustine"}
+    the_username = params.fetch("modify_name")
+    matching_user = User.where({ :username => the_username })
+    the_user = matching_user.first
+
+    input_username = params.fetch("update_un")
+
+    the_user.username = input_username
+    the_user.save
+
+    redirect_to("/users/#{the_user.username}")
   end
 end
