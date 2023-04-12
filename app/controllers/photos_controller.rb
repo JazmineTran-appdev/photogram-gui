@@ -13,6 +13,9 @@ class PhotosController < ApplicationController
     matching_photos = Photo.where({ :id => url_id })
     @the_photo = matching_photos.first
 
+    photo_comments = @the_photo.comments
+    @the_comments = photo_comments.order({ :created_at => :desc })
+
     render({ :template => "photo_templates/show.html.erb"})
   end
 
